@@ -1,17 +1,17 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+	 protect_from_forgery with: :exception
 
-  def index
+	  def index
+	  end
 
-  end
+	  def current_user
+    		@_current_user = session[:current_user_id] && User.find_by_id(session[:current_user_id]) unless defined?(@_current_user)
+    		@_current_user
+  	  end
 
-  def current_user
-	#complete this method
-  end
-
-  def is_user_logged_in?
-	#complete this method
-  	logged_in = false
-	if logged_in then true else redirect_to root_path end 
-  end
+  	  def is_user_logged_in?
+    		logged_in = !!current_user
+		if logged_in then true else redirect_to root_path end
+	  end
+	  
 end
